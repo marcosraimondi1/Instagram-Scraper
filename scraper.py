@@ -51,8 +51,9 @@ def scrap_instagram():
             data[follower] = "te sigue"
         else:
             data[follower] = "no te sigue"
-    
-    dataFrame = pandas.DataFrame.from_dict(data, orient='columns', columns=["seguidores", "estado"])
+
+    dataFrame = pandas.DataFrame.from_dict(data)
+    dataFrame.columns = ["seguidores", "estado"]
 
     printB(dataFrame)
 

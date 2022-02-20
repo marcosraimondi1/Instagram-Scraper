@@ -11,20 +11,23 @@ def get_followers(driver):
     """
     Scraps Followers Data
     - driver: object (selenium webdriver)
-    - returns: dictionary (mapping of followers to false)
+    - returns: list (followers)
     """
     try:
         # followers link
         xpath = "/html/body/div[1]/section/main/div/header/section/ul/li[2]/a"
         driver.find_element(By.XPATH, xpath).send_keys(Keys.ENTER)
 
+        followers = []
+
         # scrap data
-        
 
         printB("scraping ended")
+
+        return followers
     except NoSuchElementException:
         printB("no such element")
-        return
+        return []
 
 
 def printB(message):

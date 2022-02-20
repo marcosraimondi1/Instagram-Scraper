@@ -11,22 +11,23 @@ def get_following(driver):
     """
     Scraps Following Data
     - driver: object (selenium webdriver)
-    - returns: dictionary (mapping of followers to false)
+    - returns: list (followings)
     """
     try:
         # following link
         xpath = "/html/body/div[1]/section/main/div/header/section/ul/li[3]/a"
         driver.find_element(By.XPATH, xpath).send_keys(Keys.ENTER)
 
+        followings = []
         # scrap data
 
         # TODO
 
         printB("scraping ended")
-
+        return followings
     except NoSuchElementException:
         printB("no such element")
-        return
+        return []
 
 
 def printB(message):
