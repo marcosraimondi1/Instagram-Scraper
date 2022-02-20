@@ -1,107 +1,16 @@
+from config_driver import config_driver
+from insta_login import login
+from insta_goto_profile import goto_profile
+from insta_get_followers import get_followers, printB
+from insta_get_following import get_following
+
 # System
 from os import environ
 import time
 from dotenv import load_dotenv
 
-# Beautiful Soup
-from bs4 import BeautifulSoup
-
 # Pandas
 import pandas
-
-# Selenium
-from selenium.webdriver.common.keys import Keys
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-
-def printB (message):
-    """
-    Decorator for printing
-    - message: string
-    """
-    print("------------------------------------------")
-    print(message)
-    print("------------------------------------------")
-
-
-def login(insta_user, insta_pass, driver):
-    """
-    Login to Instagram
-    - insta_user: string (instagram username)
-    - insta_pass: string (instagram password)
-    - driver: object (selenium webdriver)
-    - returns: boolean (if logged in)
-    """
-    try:
-        # Username
-        elemento = driver.find_element(By.NAME, "username")
-        elemento.send_keys(insta_user)
-
-        # Password
-        elemento = driver.find_element(By.NAME, "password")
-        elemento.send_keys(insta_pass)
-
-        # Submit
-        elemento = driver.find_element(
-            By.XPATH, "/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[3]/button")
-
-        elemento.send_keys(Keys.ENTER)
-
-        return True
-
-    except Exception:
-        return False
-
-
-def get_followers(insta_user, driver):
-    """
-    Scraps Followers Data
-    - insta_user: string (instagram username)
-    - driver: object (selenium webdriver)
-    - returns: void
-    """
-
-    actions = ActionChains(driver)
-
-    path = f"https://www.instagram.com/{insta_user}"
-    driver.get(path)
-
-    # followers link
-    elemento = driver.find_element(
-        By.XPATH, "/html/body/div[1]/section/main/div/header/section/ul/li[2]/a")
-    elemento.send_keys(Keys.ENTER)
-
-    # scrap data
-    item = 1
-    followers = dict()  # dict mapping followers to boolean (if follower is following)
-
-    while True:
-        xpath = f"/html/body/div[6]/div/div/div/div[2]/ul/div/li[{item}]/div/div[2]/div[1]/div/div/span/a/span"
-
-        try:
-            elemento = driver.find_element(By.XPATH, xpath)
-
-            # get follower username
-            follower_user = elemento.get_attribute('innerHTML')
-            followers[follower_user] = False  # initialized in false
-
-            # scroll to element to load next li
-            actions.move_to_element(elemento).perform()
-
-            print(follower_user)
-
-        except Exception as err:
-            
-            printB(f"Error: {type(err)} -- {err}")
-            break
-
-        item += 1
-
-    printB("scraping ended")
 
 
 def scrap_instagram():
@@ -113,23 +22,41 @@ def scrap_instagram():
     insta_pass = environ.get("INSTA_PASS")
 
     # chrome driver config
-    driver = webdriver.Chrome("chromedriver.exe")
-    driver.implicitly_wait(10)  # tiempo de espera para ejecutar cada accion
+    driver = config_driver()
 
     driver.get("https://instagram.com")
 
-    time.sleep(2)
-
-    logged = login(insta_user, insta_pass, driver)
-
-    if not logged:
-        return
+    # login
+    login(insta_user, insta_pass, driver)
 
     time.sleep(2)
 
-    get_followers(insta_user, driver)
+    # ir al perfil del usuario
+    goto_profile(insta_user, driver)
 
-    time.sleep(120)
+    time.sleep(2)
+
+    # conseguir lista de seguidores
+    followers = get_followers(driver)
+
+    time.sleep(2)
+
+    # conseguir lista de seguidos
+    following = get_following(driver)
+
+    data = dict()
+
+    for follower in followers:
+        if follower in following:
+            data[follower] = "te sigue"
+        else:
+            data[follower] = "no te sigue"
+    
+    dataFrame = pandas.DataFrame.from_dict(data, orient='columns', columns=["seguidores", "estado"])
+
+    printB(dataFrame)
+
+    time.sleep(10)
 
 
 def main():
