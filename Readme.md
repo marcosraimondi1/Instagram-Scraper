@@ -75,11 +75,9 @@
 
 ## :question: About The Project
 
-[![Product Name Screen Shot][product-screenshot]]
+![Product Name Screen Shot][product-screenshot]
 
 Este es un proyecto de web scraping con python. El objetivo del programa es loguearse en instagram y obtener información acerca de los seguidores y seguidos del usuario. Crea dos archivos .csv donde se guarda la información. De los seguidores nos interesa saber si el usuario los sigue también; y de los seguidos si ellos también siguen al usuario.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### ⚙ Built With
 
@@ -146,12 +144,13 @@ After installing all requirements follow this steps:
 
 2. Chrome browser will initialize and the scraping will begin.
 
-[![Product Name Screen Shot][product-screenshot]]
+![Product Name Screen Shot][product-screenshot]
 
 If the program fails to login or doesn't finish scraping, restart it.
 
 3. The process may take a few minutes depending of the amount of followers/following. After it's done running, the browser will close and you should see 2 files generated with the data stored.
-   [![Product Name Screen Shot2][product-screenshot2]]
+
+![Product Name Screen Shot2][product-screenshot2]
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -190,7 +189,6 @@ Your Name - [@marcos-raimondi](https://www.linkedin.com/in/marcos-raimondi/) - m
 
 Project Link: [https://github.com/marcosraimondi1/Instagram-Scraper](https://github.com/marcosraimondi1/Instagram-Scraper)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
 
