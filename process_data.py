@@ -25,9 +25,11 @@ def process_data(followers, followings):
                 data[follower] = "no lo sigues"
 
         seguidoresDF = pandas.DataFrame(data.items())
-        seguidoresDF.columns = ["seguidores", "estado"]
+        seguidoresDF.index += 1
+        seguidoresDF.columns = [f"seguidores ({len(followers)})", "estado"]
 
-        seguidoresDF.to_csv('seguidores.csv', encoding='utf-8')
+        seguidoresDF.to_csv(
+            f'seguidores.csv', encoding='utf-8')
 
     # Seguidos por el usuario --------------------------------
 
@@ -42,6 +44,7 @@ def process_data(followers, followings):
                 data2[following] = "no te sigue"
 
         seguidosDF = pandas.DataFrame(data2.items())
-        seguidosDF.columns = ["seguidos", "estado"]
+        seguidosDF.index += 1
+        seguidosDF.columns = [f"seguidos ({len(followings)})", "estado"]
 
         seguidosDF.to_csv('seguidos.csv', encoding='utf-8')
