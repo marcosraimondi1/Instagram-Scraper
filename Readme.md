@@ -51,23 +51,23 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#:question:-About-The-Project">About The Project</a>
+      <a href="#question-about-the-project">About The Project</a>
       <ul>
-        <li><a href="#⚙-Built-With">Built With</a></li>
+        <li><a href="#-built-with">Built With</a></li>
       </ul>
     </li>
     <li>
-      <a href="#:checkered_flag:-getting-started">Getting Started</a>
+      <a href="#checkered_flag-getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites-:triangular_flag_on_post:">Prerequisites</a></li>
-        <li><a href="#installation-:wrench:">Installation</a></li>
+        <li><a href="#prerequisites-triangular_flag_on_post">Prerequisites</a></li>
+        <li><a href="#installation-wrench">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#fire-usage">Usage</a></li>
+    <li><a href="#two_men_holding_hands-contributing">Contributing</a></li>
+    <li><a href="#page_facing_up-license">License</a></li>
+    <li><a href="#phone-contact">Contact</a></li>
+    <li><a href="#sparkles-acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -188,7 +188,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 Your Name - [@marcos-raimondi](https://www.linkedin.com/in/marcos-raimondi/) - marcosraimondi1@gmail.com
 
 Project Link: [https://github.com/marcosraimondi1/Instagram-Scraper](https://github.com/marcosraimondi1/Instagram-Scraper)
-
 
 <!-- ACKNOWLEDGMENTS -->
 
