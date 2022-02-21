@@ -12,10 +12,12 @@ def process_data(followers, followings):
     - returns: void
     """
 
+    if not followers or not followings:
+        return
+
     # Seguidores -----------------------------
 
     data = dict()
-    data["yo"] = "te sigue"
 
     for follower in followers:
         if follower in followings:
