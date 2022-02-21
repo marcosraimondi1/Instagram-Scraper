@@ -21,25 +21,18 @@ def get_follows(driver, link_number):
         xpath = f"/html/body/div[1]/section/main/div/header/section/ul/li[{link_number}]/a"
         driver.find_element(By.XPATH, xpath).send_keys(Keys.ENTER)
 
-        time.sleep(10)
+        # SCRAP DATA
 
-        # scrap data
-        # Scroll Down
-        i = 1
-        while True:
-            try:
-                xpath = f"/html/body/div[6]/div/div/div/div[2]/ul/div/li[{i}]"
-                elemento = driver.find_element(By.XPATH, xpath)
-                followers.append(elemento.get_attribute('innerHTML'))
-                print(elemento.get_attribute("hidden"))
-                # elemento.send_keys(Keys.DOWN)
-                actions.move_to_element(elemento).perform()
-                i += 1
-            except NoSuchElementException:
-                break
+        # scrollable div: class="isgrP"
+        time.sleep(5)
+        
+        driver.execute_script(
+            "document.getElementsByClassName('isgrP')[0].scrollTop = 15000")
+
+        time.sleep(5)
 
         items = driver.find_elements(
-            By.CSS_SELECTOR, "span._7UhW9.xLCgt.qyrsm.KV-D4.se6yk.T0kll")
+            By.CSS_SELECTOR, "a.notranslate._0imsa > span._7UhW9.xLCgt.qyrsm.KV-D4.se6yk.T0kll")
 
         for item in items:
             followers.append(item.get_attribute('innerHTML'))
