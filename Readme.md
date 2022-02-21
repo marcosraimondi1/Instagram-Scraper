@@ -152,8 +152,6 @@ If the program fails to login or doesn't finish scraping, restart it.
 
 ![Product Name Screen Shot2][product-screenshot2]
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
