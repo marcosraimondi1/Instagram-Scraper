@@ -16,22 +16,35 @@ def get_follows(driver, link_number):
     followers = []
 
     try:
+
+        # obtener cantidad de follows
+        xpath = f"/html/body/div[1]/section/main/div/header/section/ul/li[{link_number}]/a/div/span"
+        cantidad = int(driver.find_element(
+            By.XPATH, xpath).get_attribute('innerHTML'))
+
         # abrir pop up requerido
         xpath = f"/html/body/div[1]/section/main/div/header/section/ul/li[{link_number}]/a"
+
         driver.find_element(By.XPATH, xpath).send_keys(Keys.ENTER)
 
-        # scroll div para que rendericen todos los elementos de la lista
         time.sleep(5)
 
-        driver.execute_script(
-            "document.getElementsByClassName('isgrP')[0].scrollTop = 150000")
-
-        time.sleep(5)
-
-        # conseguir los elementos a traves con el css selector
         selector = "a.notranslate._0imsa > span._7UhW9.xLCgt.qyrsm.KV-D4.se6yk.T0kll"
-        items = driver.find_elements(
-            By.CSS_SELECTOR, selector)
+        
+        items = []
+        
+        while True:
+
+            # conseguir los elementos a traves con el css selector
+            items = driver.find_elements(By.CSS_SELECTOR, selector)
+
+            if (len(items) >= cantidad):
+                # terminar el ciclo -> todos los datos conseguidos
+                break
+
+            # scrollear para cargar mas elementos
+            driver.execute_script(
+                "document.getElementsByClassName('isgrP')[0].scrollTop = 9999999")
 
         # guardar los nombres de los usuarios en la lista
         for item in items:
