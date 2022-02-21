@@ -12,35 +12,36 @@ def process_data(followers, followings):
     - returns: void
     """
 
-    if not followers or not followings:
-        return
+    # Seguidores del usuario -----------------------------
 
-    # Seguidores -----------------------------
+    if len(followers) != 0:
 
-    data = dict()
+        data = dict()
 
-    for follower in followers:
-        if follower in followings:
-            data[follower] = "te sigue"
-        else:
-            data[follower] = "no te sigue"
+        for follower in followers:
+            if follower in followings:
+                data[follower] = "lo sigues"
+            else:
+                data[follower] = "no lo sigues"
 
-    seguidoresDF = pandas.DataFrame(data.items())
-    seguidoresDF.columns = ["seguidores", "estado"]
+        seguidoresDF = pandas.DataFrame(data.items())
+        seguidoresDF.columns = ["seguidores", "estado"]
 
-    seguidoresDF.to_csv('seguidores.csv', encoding='utf-8')
+        seguidoresDF.to_csv('seguidores.csv', encoding='utf-8')
 
-    # Seguidos --------------------------------
+    # Seguidos por el usuario --------------------------------
 
-    data2 = dict()
+    if len(followings) != 0:
 
-    for following in followings:
-        if following in followers:
-            data2[following] = "lo sigues"
-        else:
-            data2[following] = "no lo sigues"
+        data2 = dict()
 
-    seguidosDF = pandas.DataFrame(data2.items())
-    seguidosDF.columns = ["seguidos", "estado"]
+        for following in followings:
+            if following in followers:
+                data2[following] = "te sigue"
+            else:
+                data2[following] = "no te sigue"
 
-    seguidosDF.to_csv('seguidos.csv', encoding='utf-8')
+        seguidosDF = pandas.DataFrame(data2.items())
+        seguidosDF.columns = ["seguidos", "estado"]
+
+        seguidosDF.to_csv('seguidos.csv', encoding='utf-8')
