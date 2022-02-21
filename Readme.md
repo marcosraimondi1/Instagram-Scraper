@@ -7,8 +7,6 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -17,6 +15,7 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -24,32 +23,28 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/marcosraimondi1/Instagram-Scraper">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Instagram Web Scraper</h3>
 
   <p align="center">
-    project_description
+    Instagram Web Scraper y procesamiento de datos
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/marcosraimondi1/Instagram-Scraper"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://github.com/marcosraimondi1/Instagram-Scraper">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/marcosraimondi1/Instagram-Scraper/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/marcosraimondi1/Instagram-Scraper/issues">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -69,7 +64,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -77,44 +71,34 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
-## :question: About The Project 
+
+## :question: About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+Este es un proyecto de web scraping con python. El objetivo del programa es loguearse en instagram y obtener información acerca de los seguidores y seguidos del usuario. Crea dos archivos .csv donde se guarda la información. De los seguidores nos interesa saber si el usuario los sigue también; y de los seguidos si ellos también siguen al usuario.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### ⚙ Built With
 
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+- [Python](https://www.python.org)
+- [Selenium](https://www.selenium.dev)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
+
 ## :checkered_flag: Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites :triangular_flag_on_post:
 
 This project was developed with Python 3.8.5, make shure you have python updated.
-* version
+
+- version
   ```sh
   python --version
   ```
@@ -122,16 +106,19 @@ This project was developed with Python 3.8.5, make shure you have python updated
 ### Installation :wrench:
 
 1. Clone the repo
+
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/marcosraimondi1/Instagram-Scraper.git
    ```
 
 2. Create a virtual environment
-    ```sh
-    python -m venv c:\path\to\myenv
-    ```
+
+   ```sh
+   python -m venv c:\path\to\myenv
+   ```
 
 3. Activate Virtual Environment
+
    ```sh
    .venv/Scripts/activate
    ```
@@ -143,9 +130,8 @@ This project was developed with Python 3.8.5, make shure you have python updated
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- USAGE EXAMPLES -->
+
 ## :fire: Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
@@ -154,23 +140,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
-<!-- ROADMAP -->
-## :blue_car: Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
 <!-- CONTRIBUTING -->
+
 ## :two_men_holding_hands: Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -186,55 +157,53 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
+
 ## :page_facing_up: License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- CONTACT -->
+
 ## :phone: Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Your Name - [@marcos-raimondi](https://www.linkedin.com/in/marcos-raimondi/) - marcosraimondi1@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/marcosraimondi1/Instagram-Scraper](https://github.com/marcosraimondi1/Instagram-Scraper)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- ACKNOWLEDGMENTS -->
+
 ## :sparkles: Acknowledgments
 
-* []()
-* []()
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
+- []()
+- []()
+- [Choose an Open Source License](https://choosealicense.com)
+- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+- [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
+- [Malven's Grid Cheatsheet](https://grid.malven.co/)
+- [Img Shields](https://shields.io)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+
+[contributors-shield]: https://img.shields.io/github/contributors/marcosraimondi1/Instagram-Scraper.svg?style=for-the-badge
+[contributors-url]: https://github.com/marcosraimondi1/Instagram-Scraper/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/marcosraimondi1/Instagram-Scraper.svg?style=for-the-badge
+[forks-url]: https://github.com/marcosraimondi1/Instagram-Scraper/network/members
+[stars-shield]: https://img.shields.io/github/stars/marcosraimondi1/Instagram-Scraper.svg?style=for-the-badge
+[stars-url]: https://github.com/marcosraimondi1/Instagram-Scraper/stargazers
+[issues-shield]: https://img.shields.io/github/issues/marcosraimondi1/Instagram-Scraper.svg?style=for-the-badge
+[issues-url]: https://github.com/marcosraimondi1/Instagram-Scraper/issues
+[license-shield]: https://img.shields.io/github/license/marcosraimondi1/Instagram-Scraper.svg?style=for-the-badge
+[license-url]: https://github.com/marcosraimondi1/Instagram-Scraper/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[linkedin-url]: https://linkedin.com/in/marcos-raimondi
+[product-screenshot]: images/main.jpg
+[product-screenshot2]: images/files.jpg
+
