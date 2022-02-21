@@ -13,46 +13,45 @@ from process_data import process_data
 
 def scrap_instagram():
     """
-    Scraps Instagram to check followers following status
+    Scraps Instagram to check followers/following status
     """
 
     insta_user = environ.get("INSTA_USER")
     insta_pass = environ.get("INSTA_PASS")
 
     if not insta_user:
+        # si no hay variables del .env (para dev), usamos los datos ingresados (para prod)
         insta_user = sys.argv[1]
         insta_pass = sys.argv[2]
 
     # chrome driver config
     driver = config_driver()
 
-    driver.get("https://instagram.com")
+    driver.get("https://instagram.com") # navegamos a la pagina
 
-    # login
-    login(insta_user, insta_pass, driver)
+    login(insta_user, insta_pass, driver) # nos logueamos
 
     time.sleep(2)
 
     # ir al perfil del usuario
-    path = f"https://www.instagram.com/{insta_user}"
+    path = f"https://www.instagram.com/{insta_user}/"
     driver.get(path)
 
     time.sleep(2)
 
-    # conseguir lista de seguidores
-    followers = get_follows(driver, 2)
+    followers = get_follows(driver, 2) # conseguimos lista de seguidores
 
     time.sleep(2)
 
-    # conseguir lista de seguidos
-    followings = get_follows(driver, 3)
+    followings = get_follows(driver, 3) # conseguir lista de seguidos
 
-    process_data(followers, followings)
+    process_data(followers, followings) # procesamos los datos
 
 
 def main():
 
     if len(sys.argv) != 3:
+        # se ingresan usuario y contraseña de instagram al ejecutar
         printB("Usage: py scraper.py <username> <password>")
         return
 

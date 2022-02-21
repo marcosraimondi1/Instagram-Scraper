@@ -10,5 +10,5 @@ def config_driver():
     s = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=s)
     driver.implicitly_wait(10)  # tiempo de espera para ejecutar cada accion
-    print("\n\n\n\n\n\n\n\n\n\n\n\n")
+    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
     return driver

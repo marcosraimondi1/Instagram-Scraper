@@ -6,7 +6,7 @@ from insta_get_follows import printB
 
 def process_data(followers, followings):
     """
-    Processes data into dataframes
+    Processes data into dataframes and csv
     - followers: list
     - followings: list
     - returns: void
@@ -15,7 +15,7 @@ def process_data(followers, followings):
     # Seguidores del usuario -----------------------------
 
     if len(followers) != 0:
-
+        # mapea el usuario que nos sigue y un texto si lo seguimos también o no
         data = dict()
 
         for follower in followers:
@@ -32,7 +32,7 @@ def process_data(followers, followings):
     # Seguidos por el usuario --------------------------------
 
     if len(followings) != 0:
-
+        # mapea el usuario seguido y un texto segun si también nos sigue o no
         data2 = dict()
 
         for following in followings:

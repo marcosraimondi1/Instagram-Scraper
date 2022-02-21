@@ -12,13 +12,13 @@ def login(insta_user, insta_pass, driver):
     - returns: void
     """
     try:
-        # Username
+        # Completar username
         driver.find_element(By.NAME, "username").send_keys(insta_user)
 
-        # Password
+        # Completar password
         driver.find_element(By.NAME, "password").send_keys(insta_pass)
 
-        # Submit
+        # Click en submit
         xpath = "/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[3]/button"
         driver.find_element(
             By.XPATH, xpath).send_keys(Keys.ENTER)
