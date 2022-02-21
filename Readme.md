@@ -183,7 +183,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## :phone: Contact
 
-Your Name - [@marcos-raimondi](https://www.linkedin.com/in/marcos-raimondi/) - marcosraimondi1@gmail.com
+Marcos Raimondi - [@marcos-raimondi](https://www.linkedin.com/in/marcos-raimondi/) - marcosraimondi1@gmail.com
 
 Project Link: [https://github.com/marcosraimondi1/Instagram-Scraper](https://github.com/marcosraimondi1/Instagram-Scraper)
 
