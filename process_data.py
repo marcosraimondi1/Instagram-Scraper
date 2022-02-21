@@ -26,7 +26,7 @@ def process_data(followers, followings):
 
         seguidoresDF = pandas.DataFrame(data.items())
         seguidoresDF.index += 1
-        seguidoresDF.columns = [f"{len(followers)}", "seguidores", "estado"]
+        seguidoresDF.columns = [f"seguidores ({len(followers)})", "estado"]
 
         seguidoresDF.to_csv(
             f'seguidores.csv', encoding='utf-8')
@@ -45,6 +45,6 @@ def process_data(followers, followings):
 
         seguidosDF = pandas.DataFrame(data2.items())
         seguidosDF.index += 1
-        seguidosDF.columns = [f"{len(followings)}", "seguidos", "estado"]
+        seguidosDF.columns = [f"seguidos ({len(followings)})", "estado"]
 
         seguidosDF.to_csv('seguidos.csv', encoding='utf-8')

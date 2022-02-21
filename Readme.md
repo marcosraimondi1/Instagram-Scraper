@@ -118,12 +118,12 @@ This project was developed with Python 3.8.5, make shure you have python updated
 3. Activate Virtual Environment
 
    ```sh
-   .venv/Scripts/activate
+   c:</path/to/myenv>/Scripts/activate
    ```
 
 4. Install required packages
    ```sh
-   pip install -r requirements.text
+   pip install -r requirements.txt
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
