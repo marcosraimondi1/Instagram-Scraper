@@ -1,16 +1,14 @@
-from operator import index
-from config_driver import config_driver
-from insta_login import login
-from insta_get_followers import get_followers, printB
-from insta_get_following import get_following
-
 # System
+import sys
 from os import environ
 import time
 from dotenv import load_dotenv
 
-# Pandas
-import pandas
+# Custom Modules
+from config_driver import config_driver
+from insta_login import login
+from insta_get_follows import get_follows, printB
+from process_data import process_data
 
 
 def scrap_instagram():
@@ -20,6 +18,10 @@ def scrap_instagram():
 
     insta_user = environ.get("INSTA_USER")
     insta_pass = environ.get("INSTA_PASS")
+
+    if not insta_user:
+        insta_user = sys.argv[1]
+        insta_pass = sys.argv[2]
 
     # chrome driver config
     driver = config_driver()
@@ -38,31 +40,22 @@ def scrap_instagram():
     time.sleep(2)
 
     # conseguir lista de seguidores
-    followers = get_followers(driver)
+    followers = get_follows(driver, 2)
 
     time.sleep(2)
 
     # conseguir lista de seguidos
-    following = get_following(driver)
+    followings = get_follows(driver, 3)
 
-    data = dict()
-    data["yo"] = "te sigue"
-
-    for follower in followers:
-        if follower in following:
-            data[follower] = "te sigue"
-        else:
-            data[follower] = "no te sigue"
-
-    dataFrame = pandas.DataFrame(data.items())
-    dataFrame.columns = ["seguidores", "estado"]
-
-    printB(dataFrame)
-
-    time.sleep(2)
+    process_data(followers, followings)
 
 
 def main():
+
+    if len(sys.argv) != 3:
+        printB("Usage: py scraper.py <username> <password>")
+        return
+
     load_dotenv()  # load environment variables
 
     scrap_instagram()
