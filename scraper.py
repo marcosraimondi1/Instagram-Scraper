@@ -1,6 +1,6 @@
+from operator import index
 from config_driver import config_driver
 from insta_login import login
-from insta_goto_profile import goto_profile
 from insta_get_followers import get_followers, printB
 from insta_get_following import get_following
 
@@ -32,7 +32,8 @@ def scrap_instagram():
     time.sleep(2)
 
     # ir al perfil del usuario
-    goto_profile(insta_user, driver)
+    path = f"https://www.instagram.com/{insta_user}"
+    driver.get(path)
 
     time.sleep(2)
 
@@ -45,6 +46,7 @@ def scrap_instagram():
     following = get_following(driver)
 
     data = dict()
+    data["yo"] = "te sigue"
 
     for follower in followers:
         if follower in following:
@@ -52,12 +54,12 @@ def scrap_instagram():
         else:
             data[follower] = "no te sigue"
 
-    dataFrame = pandas.DataFrame.from_dict(data)
+    dataFrame = pandas.DataFrame(data.items())
     dataFrame.columns = ["seguidores", "estado"]
 
     printB(dataFrame)
 
-    time.sleep(10)
+    time.sleep(2)
 
 
 def main():

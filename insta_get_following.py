@@ -13,21 +13,31 @@ def get_following(driver):
     - driver: object (selenium webdriver)
     - returns: list (followings)
     """
+    followings = []
+
     try:
         # following link
         xpath = "/html/body/div[1]/section/main/div/header/section/ul/li[3]/a"
         driver.find_element(By.XPATH, xpath).send_keys(Keys.ENTER)
 
-        followings = []
         # scrap data
 
         # TODO
 
         printB("scraping ended")
-        return followings
+
     except NoSuchElementException:
         printB("no such element")
-        return []
+
+    # Close Pop Up
+    xpath = "/html/body/div[6]/div/div/div/div[1]/div/div[2]/button"
+
+    try:
+        driver.find_element(By.XPATH, xpath).send_keys(Keys.ENTER)
+    except NoSuchElementException:
+        printB("error closing")
+
+    return followings
 
 
 def printB(message):

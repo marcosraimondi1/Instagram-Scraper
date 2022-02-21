@@ -1,4 +1,5 @@
 # Beautiful Soup
+from ast import Try
 from bs4 import BeautifulSoup
 
 # Selenium
@@ -13,21 +14,27 @@ def get_followers(driver):
     - driver: object (selenium webdriver)
     - returns: list (followers)
     """
+    followers = []
     try:
         # followers link
         xpath = "/html/body/div[1]/section/main/div/header/section/ul/li[2]/a"
         driver.find_element(By.XPATH, xpath).send_keys(Keys.ENTER)
 
-        followers = []
-
         # scrap data
 
         printB("scraping ended")
 
-        return followers
     except NoSuchElementException:
         printB("no such element")
-        return []
+
+    # Close Pop Up
+    xpath = "/html/body/div[6]/div/div/div/div[1]/div/div[2]/button"
+    try:
+        driver.find_element(By.XPATH, xpath).send_keys(Keys.ENTER)
+    except NoSuchElementException:
+        printB("error closing")
+
+    return followers
 
 
 def printB(message):
