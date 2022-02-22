@@ -43,8 +43,11 @@ def get_follows(driver, link_number):
                 break
 
             # scrollear para cargar mas elementos
-            driver.execute_script(
-                "document.getElementsByClassName('isgrP')[0].scrollTop = 9999999")
+            try:
+                driver.execute_script(
+                    "document.getElementsByClassName('isgrP')[0].scrollTop = 9999999")
+            except Exception:
+                break
 
         # guardar los nombres de los usuarios en la lista
         for item in items:
@@ -58,6 +61,9 @@ def get_follows(driver, link_number):
     try:
         driver.find_element(By.XPATH, xpath).send_keys(Keys.ENTER)
     except NoSuchElementException:
+        # refresh page
+        driver.refresh()
+        time.sleep(5)
         printB("error closing")
 
     return followers

@@ -18,14 +18,18 @@ def scrap_instagram():
 
     insta_user = environ.get("INSTA_USER")
     insta_pass = environ.get("INSTA_PASS")
-
+    extra_username = False
     if not insta_user:
         # si no hay variables del .env (para dev), usamos los datos ingresados (para prod)
         insta_user = sys.argv[1]
         insta_pass = sys.argv[2]
+        if len(sys.argv) > 3:
+            extra_username = sys.argv[3]
 
     # chrome driver config
     driver = config_driver()
+    
+    driver.maximize_window()
 
     driver.get("https://instagram.com") # navegamos a la pagina
 
@@ -34,8 +38,12 @@ def scrap_instagram():
     time.sleep(2)
 
     # ir al perfil del usuario
-    path = f"https://www.instagram.com/{insta_user}/"
-    driver.get(path)
+    if extra_username:
+        path = f"https://www.instagram.com/{extra_username}/"
+        driver.get(path)
+    else:
+        path = f"https://www.instagram.com/{insta_user}/"
+        driver.get(path)
 
     time.sleep(2)
 
@@ -50,9 +58,9 @@ def scrap_instagram():
 
 def main():
 
-    if len(sys.argv) != 3:
+    if len(sys.argv) < 3:
         # se ingresan usuario y contraseña de instagram al ejecutar
-        printB("Usage: py scraper.py <username> <password>")
+        printB("Usage: py scraper.py <username> <password> <usernames_to_scrap>")
         return
 
     load_dotenv()  # load environment variables
