@@ -154,6 +154,21 @@ After installing all requirements follow this steps:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- ROADMAP -->
+## :blue_car: Roadmap
+
+- [x] Login to Instagram
+- [x] Go to Profile
+- [x] Scrap Follows
+    - [x] Scrap infinite loading list
+- [x] Documenting, Error Handling and Logging
+- [x] Scrap other users info 
+- [ ] Develop a web app
+
+See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- CONTRIBUTING -->
 
 ## :two_men_holding_hands: Contributing
