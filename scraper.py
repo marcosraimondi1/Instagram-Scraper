@@ -5,11 +5,7 @@ import time
 from dotenv import load_dotenv
 
 # Custom Modules
-from config_driver import config_driver
-from insta_login import login
-from insta_get_follows import get_follows, printB
-from process_data import process_data
-
+from modules import config_driver, insta_login, insta_get_follows, process_data
 
 def scrap_instagram():
     """
@@ -27,17 +23,21 @@ def scrap_instagram():
             extra_username = sys.argv[3]
 
     # chrome driver config
-    driver = config_driver()
-    
-    driver.maximize_window()
+    driver = config_driver.config()
 
+    if not driver:
+        print("Driver error: failed to start browser")
+        return
+
+    
     driver.get("https://instagram.com") # navegamos a la pagina
 
-    login(insta_user, insta_pass, driver) # nos logueamos
+    insta_login.login(insta_user, insta_pass, driver) # nos logueamos
 
-    time.sleep(2)
+    time.sleep(3)
 
     # ir al perfil del usuario
+
     if extra_username:
         path = f"https://www.instagram.com/{extra_username}/"
         driver.get(path)
@@ -47,25 +47,25 @@ def scrap_instagram():
 
     time.sleep(2)
 
-    followers = get_follows(driver, 2) # conseguimos lista de seguidores
+    followers = insta_get_follows.get(driver, 2) # conseguimos lista de seguidores
 
     time.sleep(2)
 
-    followings = get_follows(driver, 3) # conseguir lista de seguidos
+    followings = insta_get_follows.get(driver, 3) # conseguir lista de seguidos
 
-    process_data(followers, followings) # procesamos los datos
+    process_data.process(followers, followings) # procesamos los datos
 
 
 def main():
 
     if len(sys.argv) < 3:
         # se ingresan usuario y contraseña de instagram al ejecutar
-        printB("Usage: py scraper.py <username> <password> <usernames_to_scrap>")
+        insta_get_follows.printB("Usage: py scraper.py <username> <password> <usernames_to_scrap>")
         return
     elif len(sys.argv) >3:
-        printB(f"Starting web scraping for: {sys.argv[2:]}")
+        insta_get_follows.printB(f"Starting web scraping for: {sys.argv[2:]}")
     else:
-        printB(f"Starting web scraping for: {sys.argv[1]}")
+        insta_get_follows.printB(f"Starting web scraping for: {sys.argv[1]}")
 
     load_dotenv()  # load environment variables
 

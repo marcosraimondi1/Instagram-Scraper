@@ -1,10 +1,10 @@
 # Pandas
 import pandas
 
-from insta_get_follows import printB
+from modules.insta_get_follows import printB
 
 
-def process_data(followers, followings):
+def process(followers, followings):
     """
     Processes data into dataframes and csv
     - followers: list

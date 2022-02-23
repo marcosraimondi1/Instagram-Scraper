@@ -7,7 +7,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 loadingIcons = ["-","\\","|","/","-","\\","|","/","-","\\"] # for console logging
 
-def get_follows(driver, link_number):
+def get(driver, link_number):
     """
     Scraps Followers Data
     - driver: object (selenium webdriver)
