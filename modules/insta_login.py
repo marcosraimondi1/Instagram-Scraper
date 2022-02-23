@@ -1,6 +1,9 @@
+import time
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
+
+from modules.insta_get_follows import printB
 
 
 def login(insta_user, insta_pass, driver):
@@ -12,16 +15,31 @@ def login(insta_user, insta_pass, driver):
     - returns: void
     """
     try:
-        # Completar username
-        driver.find_element(By.NAME, "username").send_keys(insta_user)
+        tries = 0
+        while tries < 10:
+            # navegamos a la pagina
+            driver.get("https://instagram.com") 
 
-        # Completar password
-        driver.find_element(By.NAME, "password").send_keys(insta_pass)
+            time.sleep(3)
+            
+            # Completar username
+            driver.find_element(By.NAME, "username").send_keys(insta_user)
 
-        # Click en submit
-        xpath = "/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[3]/button"
-        driver.find_element(
-            By.XPATH, xpath).send_keys(Keys.ENTER)
+            # Completar password y enter
+            driver.find_element(By.NAME, "password").send_keys(insta_pass, Keys.ENTER)
 
-    except NoSuchElementException:
-        return
+            time.sleep(1.5)
+
+            # Ver si hay mensaje de error
+            try:
+                error = driver.find_element(By.ID, "slfErrorAlert")
+                printB(f"Error: {error.get_attribute('innerHTML')} \n trying again in 10 seconds")
+                time.sleep(10)
+                tries += 1
+                login(insta_user, insta_pass, driver)
+
+            except NoSuchElementException:
+                print("Login successful")
+                return
+    except Exception as ex:
+        raise Exception(f"Failed to login: {ex}")

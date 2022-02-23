@@ -7,7 +7,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 loadingIcons = ["-","\\","|","/","-","\\","|","/","-","\\"] # for console logging
 
-def get(driver, link_number):
+def get(driver, target):
     """
     Scraps Followers Data
     - driver: object (selenium webdriver)
@@ -15,7 +15,9 @@ def get(driver, link_number):
     - returns: list (followers)
     """
     followers = []
-
+    link_number = 2
+    if target == "following":
+        link_number = 3
     try:
 
         # obtener cantidad de follows
@@ -36,19 +38,22 @@ def get(driver, link_number):
         
         loadingIndex = 0
         items = []
-
+        ti = time.time()
+        
         # scrollear hasta encontrar todos los follows
-        while True:
+        while (tf - ti) < 15:
+            tf = time.time()
 
             # conseguir los elementos a traves con el css selector
             items = driver.find_elements(By.CSS_SELECTOR, selector)
-            
-            loadingIndex += 1 # for loading animation
 
             if len(items) == len(followers) and len(followers) < cantidad:
-                time.sleep(0.1)
-                continue # sin cambios
-
+                # sin cambios
+                time.sleep(0.2)
+                continue
+            
+            ti = time.time()
+            
             # guardar los nombres de los usuarios en la lista
             for item in items[len(followers):]:
                 try:
@@ -57,6 +62,7 @@ def get(driver, link_number):
                     print(ex)
                     continue
 
+            loadingIndex += 1 # for loading animation
             printB(f"{len(followers)} / {cantidad} {loadingIcons[loadingIndex%10]}")
             
             if (len(followers) >= cantidad):
@@ -67,6 +73,7 @@ def get(driver, link_number):
             try:
                 driver.execute_script(
                     "document.getElementsByClassName('isgrP')[0].scrollTop = 9999999")
+
             except Exception:
                 break
         
@@ -89,6 +96,9 @@ def get(driver, link_number):
         time.sleep(5)
 
     printB("Scraping ended . . .")
+
+    if len(followers) == 0:
+        raise Exception(f"Error: {target} list empty")
 
     return followers
 

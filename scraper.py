@@ -73,7 +73,7 @@ def main():
         insta_get_follows.printB("Usage: py scraper.py <username> <password> <usernames_to_scrap>")
         return
     elif len(sys.argv) >3:
-        insta_get_follows.printB(f"Starting web scraping for: {sys.argv[2:]}")
+        insta_get_follows.printB(f"Starting web scraping for: {sys.argv[3]}")
     else:
         insta_get_follows.printB(f"Starting web scraping for: {sys.argv[1]}")
 
