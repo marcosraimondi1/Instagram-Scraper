@@ -16,18 +16,24 @@ def process(followers, followings):
     # Seguidores del usuario -----------------------------
 
     if len(followers) != 0:
-        # mapea el usuario que nos sigue y un texto si lo seguimos también o no
-        data = dict()
-
+        # devuelve un data frame con 2 columnas, los seguidores que tambien sigues y los que no
+        seguidos = list()
+        no_seguidos = list()
+        
         for follower in followers:
             if follower in followings:
-                data[follower] = "lo sigues"
+                seguidos.append(follower)
             else:
-                data[follower] = "no lo sigues"
+                no_seguidos.append(follower)
 
-        seguidoresDF = pandas.DataFrame(data.items())
+        # listas de mismo len
+        same_len = same_len_lists(seguidos, no_seguidos)
+
+        seguidoresDF = pandas.DataFrame({
+            f"seguidos ({len(seguidos)})": same_len[0],
+            f"no seguidos ({len(no_seguidos)})":  same_len[1]
+        })
         seguidoresDF.index += 1
-        seguidoresDF.columns = [f"seguidores ({len(followers)})", "estado"]
 
         seguidoresDF.to_csv(
             f'seguidores.csv', encoding='utf-8')
@@ -36,16 +42,35 @@ def process(followers, followings):
 
     if len(followings) != 0:
         # mapea el usuario seguido y un texto segun si también nos sigue o no
-        data2 = dict()
+        siguiendo = list()
+        no_siguiendo = list()
 
         for following in followings:
             if following in followers:
-                data2[following] = "te sigue"
+                siguiendo.append(following)
             else:
-                data2[following] = "no te sigue"
+                no_siguiendo.append(following)
 
-        seguidosDF = pandas.DataFrame(data2.items())
+        # listas de mismo len
+        same_len = same_len_lists(siguiendo, no_siguiendo)
+
+        seguidosDF = pandas.DataFrame({
+            f"te siguen ({len(siguiendo)})": same_len[0],
+            f"no te siguen ({len(no_siguiendo)})":  same_len[1]
+        })
         seguidosDF.index += 1
-        seguidosDF.columns = [f"seguidos ({len(followings)})", "estado"]
 
         seguidosDF.to_csv('seguidos.csv', encoding='utf-8')
+
+
+def same_len_lists(A,B):
+    # create lists of same size
+    arrays = [A, B]
+    max_length = 0
+    for array in arrays:
+        max_length = max(max_length, len(array))
+
+    for array in arrays:
+        array += ['------'] * (max_length - len(array))
+
+    return arrays

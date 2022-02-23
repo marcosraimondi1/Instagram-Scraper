@@ -14,7 +14,9 @@ def scrap_instagram():
 
     insta_user = environ.get("INSTA_USER")
     insta_pass = environ.get("INSTA_PASS")
+
     extra_username = False
+    
     if not insta_user:
         # si no hay variables del .env (para dev), usamos los datos ingresados (para prod)
         insta_user = sys.argv[1]
@@ -30,30 +32,38 @@ def scrap_instagram():
         return
 
     
-    driver.get("https://instagram.com") # navegamos a la pagina
+    try:
+        insta_login.login(insta_user, insta_pass, driver) # nos logueamos
+    
+        time.sleep(3)
 
-    insta_login.login(insta_user, insta_pass, driver) # nos logueamos
+        # ir al perfil del usuario
 
-    time.sleep(3)
+        if extra_username:
+            path = f"https://www.instagram.com/{extra_username}/"
+            driver.get(path)
+        else:
+            path = f"https://www.instagram.com/{insta_user}/"
+            driver.get(path)
 
-    # ir al perfil del usuario
-
-    if extra_username:
-        path = f"https://www.instagram.com/{extra_username}/"
-        driver.get(path)
-    else:
-        path = f"https://www.instagram.com/{insta_user}/"
-        driver.get(path)
+    except Exception as ex:
+        print(ex)
+        return
 
     time.sleep(2)
+    try:
 
-    followers = insta_get_follows.get(driver, 2) # conseguimos lista de seguidores
+        followers = insta_get_follows.get(driver, "followers") # conseguimos lista de seguidores
 
-    time.sleep(2)
+        time.sleep(2)
 
-    followings = insta_get_follows.get(driver, 3) # conseguir lista de seguidos
+        followings = insta_get_follows.get(driver, "following") # conseguir lista de seguidos
+        
+        process_data.process(followers, followings) # procesamos los datos
 
-    process_data.process(followers, followings) # procesamos los datos
+    except Exception as ex:
+        print(ex)
+
 
 
 def main():
