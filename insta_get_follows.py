@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
+loadingIcons = ["-","\\","|","/","-","\\","|","/","-","\\"] # for console logging
 
 def get_follows(driver, link_number):
     """
@@ -22,6 +23,8 @@ def get_follows(driver, link_number):
         cantidad = int(driver.find_element(
             By.XPATH, xpath).get_attribute('innerHTML'))
 
+        printB(f"Cantidad de follows: {cantidad}")
+
         # abrir pop up requerido
         xpath = f"/html/body/div[1]/section/main/div/header/section/ul/li[{link_number}]/a"
 
@@ -29,18 +32,36 @@ def get_follows(driver, link_number):
 
         time.sleep(5)
 
-        selector = "a.notranslate._0imsa > span._7UhW9.xLCgt.qyrsm.KV-D4.se6yk.T0kll"
+        selector = "a.notranslate._0imsa > span._7UhW9.xLCgt.qyrsm.KV-D4.se6yk.T0kll" # selector para los elementos de la lista     
         
+        loadingIndex = 0
         items = []
-        
+
+        # scrollear hasta encontrar todos los follows
         while True:
 
             # conseguir los elementos a traves con el css selector
             items = driver.find_elements(By.CSS_SELECTOR, selector)
+            
+            loadingIndex += 1 # for loading animation
 
-            if (len(items) >= cantidad):
+            if len(items) == len(followers) and len(followers) < cantidad:
+                time.sleep(0.1)
+                continue # sin cambios
+
+            # guardar los nombres de los usuarios en la lista
+            for item in items[len(followers):]:
+                try:
+                    followers.append(item.get_attribute('innerHTML')) # extract text
+                except Exception as ex:
+                    print(ex)
+                    continue
+
+            printB(f"{len(followers)} / {cantidad} {loadingIcons[loadingIndex%10]}")
+            
+            if (len(followers) >= cantidad):
                 # terminar el ciclo -> todos los datos conseguidos
-                break
+                break          
 
             # scrollear para cargar mas elementos
             try:
@@ -48,13 +69,14 @@ def get_follows(driver, link_number):
                     "document.getElementsByClassName('isgrP')[0].scrollTop = 9999999")
             except Exception:
                 break
-
-        # guardar los nombres de los usuarios en la lista
-        for item in items:
-            followers.append(item.get_attribute('innerHTML'))
+        
+        printB("Scrolling Ended")      
 
     except NoSuchElementException:
         printB("no such element")
+    
+    except Exception:
+        printB("Something went wrong . . .")
 
     # Close Pop Up
     xpath = "/html/body/div[6]/div/div/div/div[1]/div/div[2]/button"
@@ -63,8 +85,10 @@ def get_follows(driver, link_number):
     except NoSuchElementException:
         # refresh page
         driver.refresh()
+        printB("error closing, refreshing page")
         time.sleep(5)
-        printB("error closing")
+
+    printB("Scraping ended . . .")
 
     return followers
 

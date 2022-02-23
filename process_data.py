@@ -11,7 +11,8 @@ def process_data(followers, followings):
     - followings: list
     - returns: void
     """
-
+    printB(f"Followers: {len(followers)}")
+    printB(f"Followings: {len(followings)}")
     # Seguidores del usuario -----------------------------
 
     if len(followers) != 0:

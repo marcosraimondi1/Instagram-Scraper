@@ -62,6 +62,10 @@ def main():
         # se ingresan usuario y contraseña de instagram al ejecutar
         printB("Usage: py scraper.py <username> <password> <usernames_to_scrap>")
         return
+    elif len(sys.argv) >3:
+        printB(f"Starting web scraping for: {sys.argv[2:]}")
+    else:
+        printB(f"Starting web scraping for: {sys.argv[1]}")
 
     load_dotenv()  # load environment variables
 
