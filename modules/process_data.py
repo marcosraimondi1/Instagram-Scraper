@@ -26,17 +26,14 @@ def process(followers, followings):
             else:
                 no_seguidos.append(follower)
 
+        ts = len(seguidos)
+        nts = len(no_seguidos)
+
         # listas de mismo len
         same_len = same_len_lists(seguidos, no_seguidos)
 
-        seguidoresDF = pandas.DataFrame({
-            f"seguidos ({len(seguidos)})": same_len[0],
-            f"no seguidos ({len(no_seguidos)})":  same_len[1]
-        })
-        seguidoresDF.index += 1
-
-        seguidoresDF.to_csv(
-            f'seguidores.csv', encoding='utf-8')
+        create_data_frames(same_len, [f"los sigues ({ts})", f"no los sigues ({nts})"], "seguidores")
+        
 
     # Seguidos por el usuario --------------------------------
 
@@ -51,20 +48,21 @@ def process(followers, followings):
             else:
                 no_siguiendo.append(following)
 
+        ts = len(siguiendo)
+        nts = len(no_siguiendo)
+
         # listas de mismo len
         same_len = same_len_lists(siguiendo, no_siguiendo)
 
-        seguidosDF = pandas.DataFrame({
-            f"te siguen ({len(siguiendo)})": same_len[0],
-            f"no te siguen ({len(no_siguiendo)})":  same_len[1]
-        })
-        seguidosDF.index += 1
-
-        seguidosDF.to_csv('seguidos.csv', encoding='utf-8')
-
+        create_data_frames(same_len, [f"te siguen ({ts})", f"no te siguen ({nts})"], "seguidos")
 
 def same_len_lists(A,B):
-    # create lists of same size
+    """
+    Create lists of same size
+    - A: list
+    - B: list
+    - returns: list (2 lists of same size)
+    """
     arrays = [A, B]
     max_length = 0
     for array in arrays:
@@ -74,3 +72,21 @@ def same_len_lists(A,B):
         array += ['------'] * (max_length - len(array))
 
     return arrays
+
+def create_data_frames (lists, listNames, name):
+    """
+    Creates Dataframes and .csv files
+    - lists: list (2 lists with same len)
+    - listNames: list (strings for columns titles)
+    - name: string (file name)
+    - returns: void
+    """
+    dF = pandas.DataFrame({
+            f"{listNames[0]}": lists[0],
+            f"{listNames[1]}":  lists[1]
+        })
+    
+    dF.index += 1
+
+    dF.to_csv(
+        f'{name}.csv', encoding='utf-8')

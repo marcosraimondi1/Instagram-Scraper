@@ -41,8 +41,11 @@ def get(driver, target):
         ti = time.time()
         
         # scrollear hasta encontrar todos los follows
-        while (tf - ti) < 15:
-            tf = time.time()
+        while (time.time() - ti) < 15:
+            
+            # loading animation
+            loadingIndex += 1 
+            printB(f"{len(followers)} / {cantidad} {loadingIcons[loadingIndex%10]}")
 
             # conseguir los elementos a traves con el css selector
             items = driver.find_elements(By.CSS_SELECTOR, selector)
@@ -62,8 +65,7 @@ def get(driver, target):
                     print(ex)
                     continue
 
-            loadingIndex += 1 # for loading animation
-            printB(f"{len(followers)} / {cantidad} {loadingIcons[loadingIndex%10]}")
+            
             
             if (len(followers) >= cantidad):
                 # terminar el ciclo -> todos los datos conseguidos
@@ -82,7 +84,8 @@ def get(driver, target):
     except NoSuchElementException:
         printB("no such element")
     
-    except Exception:
+    except Exception as ex:
+        print(ex)
         printB("Something went wrong . . .")
 
     # Close Pop Up
