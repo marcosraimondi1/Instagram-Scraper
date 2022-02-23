@@ -34,23 +34,25 @@ def scrap_instagram():
     
     try:
         insta_login.login(insta_user, insta_pass, driver) # nos logueamos
-    
-        time.sleep(3)
 
+        time.sleep(2)
+        
         # ir al perfil del usuario
-
+        path = ""
         if extra_username:
             path = f"https://www.instagram.com/{extra_username}/"
-            driver.get(path)
         else:
             path = f"https://www.instagram.com/{insta_user}/"
-            driver.get(path)
 
+        while driver.current_url != path:
+            print(f"redirecting to {path}")
+            driver.get(path)
+            time.sleep(2)
+            
     except Exception as ex:
         print(ex)
         return
 
-    time.sleep(2)
     try:
 
         followers = insta_get_follows.get(driver, "followers") # conseguimos lista de seguidores
