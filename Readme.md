@@ -137,16 +137,16 @@ After installing all requirements follow this steps:
 1. Start Program
 
    ```sh
-   py scraper.py <username> <password>
+   py scraper.py <username> <password> <extra_username?>
    ```
 
-   Where username is your instagram's username and password is your instagram's password
+   Where username is your instagram's username, password is your instagram's password and extra_username is an optional parameter for scraping another's users account.
 
 2. Chrome browser will initialize and the scraping will begin.
 
 ![Product Name Screen Shot][product-screenshot]
 
-If the program fails to login or doesn't finish scraping, restart it.
+   If the program fails to login or doesn't finish scraping, restart it. It works best for accounts with less than 900 followers / following.
 
 3. The process may take a few minutes depending of the amount of followers/following. After it's done running, the browser will close and you should see 2 files generated with the data stored.
 
